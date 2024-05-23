@@ -6,6 +6,12 @@ const createOrder = async (payload: EOrder) => {
   return result;
 };
 
+const retrieveAllOrders = async () => {
+  const result = await Order.find({});
+  return result;
+};
+
 export const OrderServices = {
   createOrder,
+  retrieveAllOrders,
 };

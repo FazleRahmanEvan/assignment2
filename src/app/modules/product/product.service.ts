@@ -1,4 +1,4 @@
-import EProduct from './product.interface';
+import EProduct, { Query } from './product.interface';
 import { Product } from './product.model';
 
 const createProduct = async (payload: EProduct) => {
@@ -6,8 +6,21 @@ const createProduct = async (payload: EProduct) => {
   return result;
 };
 
-const getAllProducts = async () => {
-  const result = await Product.find();
+const getAllProducts = async (searchTerm: Query) => {
+  let query = {};
+  if (searchTerm) {
+    query = {
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { description: { $regex: searchTerm, $options: 'i' } },
+        { category: { $regex: searchTerm, $options: 'i' } },
+        { tags: { $regex: searchTerm, $options: 'i' } },
+      ],
+    };
+  }
+
+  const result = await Product.find(query);
+
   return result;
 };
 
