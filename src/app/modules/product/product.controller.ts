@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ProductServices } from './product.service';
 import EProduct from './product.interface';
+import { Product } from './product.model';
 
 const createProduct = async (req: Request, res: Response) => {
   const { product: productData } = req.body;
@@ -14,13 +15,31 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 const getAllProducts = async (req: Request, res: Response) => {
-  const result = await ProductServices.getAllProducts();
+  const searchTerm = req.query.searchTerm;
 
-  res.json({
-    success: true,
-    message: 'Products are retrieved successfully',
-    data: result,
-  });
+  try {
+    const products = await ProductServices.getAllProducts(searchTerm);
+
+    res.json({
+      success: true,
+      message: `Products '${searchTerm}' matched successfully!`,
+      data: products,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: 'An error occurred',
+      error: error.message,
+    });
+  }
+
+  //   const result = await ProductServices.getAllProducts();
+
+  //   res.json({
+  //     success: true,
+  //     message: 'Products are retrieved successfully',
+  //     data: result,
+  //   });
 };
 
 const getProductId = async (req: Request, res: Response) => {

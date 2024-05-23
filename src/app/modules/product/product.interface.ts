@@ -1,3 +1,5 @@
+import { ParsedQs } from 'qs';
+
 export type EVariant = {
   type: string;
   value: string;
@@ -17,5 +19,6 @@ export type EProduct = {
   variants: [EVariant];
   inventory: EInventory;
 };
+export type Query = string | ParsedQs | string[] | ParsedQs[] | undefined;
 
 export default EProduct;
