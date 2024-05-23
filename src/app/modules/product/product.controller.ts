@@ -18,7 +18,7 @@ const getAllProducts = async (req: Request, res: Response) => {
 
   res.json({
     success: true,
-    message: 'Product fetched successfully',
+    message: 'Products are retrieved successfully',
     data: result,
   });
 };
@@ -29,7 +29,7 @@ const getProductId = async (req: Request, res: Response) => {
 
   res.json({
     success: true,
-    message: 'Product fetched successfully',
+    message: 'Product is retrieved successfully',
     data: result,
   });
 };
