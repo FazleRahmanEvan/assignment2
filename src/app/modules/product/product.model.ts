@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, connect } from 'mongoose';
-import Product, { Inventory, Variant } from './product.interface';
+import Product, { EInventory, EVariant, EProduct } from './product.interface';
 
-const variantSchema = new Schema<Variant>({
+const variantSchema = new Schema<EVariant>({
   type: {
     type: String,
     required: true,
@@ -12,7 +12,7 @@ const variantSchema = new Schema<Variant>({
   },
 });
 
-const inventorySchema = new Schema<Inventory>({
+const inventorySchema = new Schema<EInventory>({
   quantity: {
     type: Number,
     required: true,
@@ -23,7 +23,7 @@ const inventorySchema = new Schema<Inventory>({
   },
 });
 
-const productSchema = new Schema<Product>({
+const productSchema = new Schema<EProduct>({
   name: {
     type: String,
     required: [true, 'Name is required'],
